@@ -28,6 +28,54 @@
         android:hint="Home ID"
         android:id="@+id/homeidet"
         android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/servprovTV"
+            android:text="Service Provider"/>
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:id="@+id/servpro_sp"
+            android:layout_gravity="center">
+        </Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:id="@+id/brdpackTV"
+            android:text="Broadband Package"/>
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/broadbandpack_sp"
+            android:layout_gravity="center">
+
+        </Spinner>
+
+    </LinearLayout>
+
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,6 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Peak Time"
+        android:id="@+id/peaktimebut"
         android:onClick="showTimePickerDialog" />
 
         <EditText
@@ -65,6 +114,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:id="@+id/to1tv"
             android:text="TO"/>
 
         <EditText
@@ -84,6 +134,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Off - Peak"
+            android:id="@+id/offpeaktimebut"
             android:onClick="showTimePickerDialog2" />
 
         <EditText
@@ -94,6 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
+            android:id="@+id/to2tv"
             android:text="TO"/>
 
         <EditText
@@ -114,9 +166,18 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/homeidbut2"
+        android:onClick="homereg2"
+        android:text="Verify Home"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/homeidbut"
         android:onClick="homereg"
         android:text="Register Home"/>
+
+
 
 
 

@@ -4,4 +4,32 @@
     <string name="title_activity_user_registration">User Registration</string>
     <string name="title_activity_registration_confirmation">Registration Confirmation</string>
     <string name="title_activity_access_code_confirmation">Access Code Confirmation</string>
+
+    <string-array name="serviceproviders">
+        <item>--Select--</item>
+        <item>SLT</item>
+        <item>DIALOG</item>
+        <item>LANKA BELL</item>
+    </string-array>
+
+    <string-array name="broadbandpacksDialog">
+        <item>--Select--</item>
+        <item>Mini</item>
+        <item>Lite</item>
+        <item>Plus</item>
+    </string-array>
+
+    <string-array name="broadbandpacksSLT">
+        <item>--Select--</item>
+        <item>Light</item>
+        <item>Family</item>
+        <item>Super Middle</item>
+    </string-array>
+
+    <string-array name="broadbandpacksLB">
+        <item>--Select--</item>
+        <item>Starter</item>
+        <item>Intro</item>
+        <item>Family</item>
+    </string-array>
 </resources>

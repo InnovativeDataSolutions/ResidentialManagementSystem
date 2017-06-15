@@ -24,7 +24,7 @@ public class UserRegistration extends AppCompatActivity {
 
     Button userreg;
     EditText fnet,lnet,emailet,mobet;
-    String fname,lname,email,mob;
+    String homeid,fname,lname,email,mob,check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,8 @@ public class UserRegistration extends AppCompatActivity {
         lnet = (EditText)findViewById(R.id.lnet);
         emailet = (EditText)findViewById(R.id.emailet);
         mobet = (EditText)findViewById(R.id.mobet);
+
+        homeid = getIntent().getStringExtra("homeid");
     }
 
     public void userreg(View view){
@@ -46,13 +48,11 @@ public class UserRegistration extends AppCompatActivity {
         email = emailet.getText().toString();
         mob = mobet.getText().toString();
 
-        if (fname.equals("")||lname.equals("")||email.equals("")||mob.equals("")){
+        if (fname.equals("")||lname.equals("")||email.equals("")){
             Toast.makeText(UserRegistration.this, "Please enter all infomation", Toast.LENGTH_SHORT).show();
         }else{
-//            UserReg ur = new UserReg();
-//            ur.execute(fname,lname,email,mob);
-        Intent intent = new Intent(this, RegistrationConfirmation.class);
-        startActivity(intent);
+            UserReg ur = new UserReg();
+            ur.execute(homeid,fname,lname,email,mob);
         }
     }
 
@@ -60,16 +60,17 @@ public class UserRegistration extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String fn = params[0];
-            String ln = params[1];
-            String email = params[2];
-            String mob = params[3];
+            String homeid = params[0];
+            String fn = params[1];
+            String ln = params[2];
+            String email = params[3];
+            String mob = params[4];
             String data="";
             int tmp;
 
             try {
-                URL url = new URL("http://");
-                String urlParams = "fn="+fn+"&ln="+ln+"&email="+email+"&mob="+mob;
+                URL url = new URL("http://220.247.201.80:6079/Residential_Manage_SRV/admin_reg_post");
+                String urlParams = "Home_ID="+homeid+"&First_Name="+fn+"&Last_Name="+ln+"&Email="+email+"&Mobile="+mob;
 
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
                 httpURLConnection.setDoOutput(true);
@@ -101,21 +102,18 @@ public class UserRegistration extends AppCompatActivity {
             String err=null;
             try {
                 JSONObject root = new JSONObject(s);
-                JSONObject user_data = root.getJSONObject("user_data");
-//                NAME = user_data.getString("name");
-//                PASSWORD = user_data.getString("password");
-//                EMAIL = user_data.getString("email");
+                check = root.getString("STATUS");
             } catch (JSONException e) {
                 e.printStackTrace();
                 err = "Exception: "+e.getMessage();
             }
-
-//            Intent i = new Intent(ctx, Register.class);
-//            i.putExtra("name", NAME);
-//            i.putExtra("password", PASSWORD);
-//            i.putExtra("email", EMAIL);
-//            i.putExtra("err", err);
-//            startActivity(i);
+            Toast.makeText(UserRegistration.this, s, Toast.LENGTH_LONG).show();
+            if (check.contains("1")) {
+                Intent i = new Intent(UserRegistration.this, RegistrationConfirmation.class);
+                startActivity(i);
+            }else{
+                Toast.makeText(UserRegistration.this, "Invalid infoamtion please try again", Toast.LENGTH_LONG).show();
+            }
 
         }
     }
