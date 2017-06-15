@@ -1,6 +1,7 @@
 package com.ids.residentialmanagementsystem;
 
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,6 +33,9 @@ public class HomeRegistration extends AppCompatActivity {
     TextView to1, to2, homeinfotv,servprovtv,brdpacktv;
     EditText homeet, peaktime, peakcount, offpeakcount, peaktime2, offpeaktime, offpeaktime2, billrecycle;
     String homeid, peakC, offpeakC, peaktimeval, peaktime2val, offpeaktimeval, offpeaktime2val, billrecycleday, servprovresp, brdpackresp, vercode = "123456789", check, check2;
+    boolean inserthome;
+    Context ctx = this;
+    Database db = new Database(ctx);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -302,6 +306,7 @@ public class HomeRegistration extends AppCompatActivity {
             Toast.makeText(HomeRegistration.this, s, Toast.LENGTH_LONG).show();
 
             if (check.contains("1")) {
+
                 homereg.setVisibility(View.VISIBLE);
                 peakcount.setVisibility(View.VISIBLE);
                 offpeakcount.setVisibility(View.VISIBLE);
@@ -323,27 +328,7 @@ public class HomeRegistration extends AppCompatActivity {
                 homeverify.setVisibility(View.GONE);
                 homeet.setVisibility(View.GONE);
             }else{
-                homereg.setVisibility(View.VISIBLE);
-                peakcount.setVisibility(View.VISIBLE);
-                offpeakcount.setVisibility(View.VISIBLE);
-                peaktime.setVisibility(View.VISIBLE);
-                peaktime2.setVisibility(View.VISIBLE);
-                peaktimebut.setVisibility(View.VISIBLE);
-                offpeaktimebut.setVisibility(View.VISIBLE);
-                offpeaktime.setVisibility(View.VISIBLE);
-                offpeaktime2.setVisibility(View.VISIBLE);
-                to1.setVisibility(View.VISIBLE);
-                to2.setVisibility(View.VISIBLE);
-                servprovtv.setVisibility(View.VISIBLE);
-                brdpacktv.setVisibility(View.VISIBLE);
-                billrecycle.setVisibility(View.VISIBLE);
-
-                serviceprovider.setVisibility(View.VISIBLE);
-                broadbandpackage.setVisibility(View.VISIBLE);
-                homeinfotv.setText("Please enter remaining infomation");
-
-                homeverify.setVisibility(View.GONE);
-                homeet.setVisibility(View.GONE);
+                homeinfotv.setText("You have already registered this device and created an admin!");
             }
 
         }
@@ -431,6 +416,11 @@ public class HomeRegistration extends AppCompatActivity {
                 err = "Exception: " + e.getMessage();
             }
             Toast.makeText(HomeRegistration.this, s, Toast.LENGTH_LONG).show();
+
+            inserthome = db.inserthomedetails(homeid,peakC, offpeakC, peaktimeval, peaktime2val, offpeaktimeval, offpeaktime2val, billrecycleday,vercode);
+            if (inserthome == true){
+                Toast.makeText(ctx, "Home details have been recorded", Toast.LENGTH_SHORT).show();
+            }
 
             Intent i = new Intent(HomeRegistration.this, UserRegistration.class);
             i.putExtra("homeid", homeid);
