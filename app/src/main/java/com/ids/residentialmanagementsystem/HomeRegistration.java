@@ -35,6 +35,7 @@ public class HomeRegistration extends AppCompatActivity {
     String homeid, peakC, offpeakC, peaktimeval, peaktime2val, offpeaktimeval, offpeaktime2val, billrecycleday, servprovresp, brdpackresp, vercode = "123456789", check, check2;
     boolean inserthome;
     Context ctx = this;
+    long count;
     Database db = new Database(ctx);
 
     @Override
@@ -43,6 +44,13 @@ public class HomeRegistration extends AppCompatActivity {
         setContentView(R.layout.activity_home_registration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        count = db.checkreg();
+
+        if (count > 0){
+            Intent go = new Intent(ctx,AccessCodeConfirmation.class);
+            startActivity(go);
+        }
 
         serviceprovider = (Spinner) findViewById(R.id.servpro_sp);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,

@@ -25,4 +25,7 @@ public class RegistrationConfirmation extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 }

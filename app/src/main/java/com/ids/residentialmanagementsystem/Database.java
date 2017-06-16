@@ -2,6 +2,7 @@ package com.ids.residentialmanagementsystem;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -69,5 +70,13 @@ public class Database extends SQLiteOpenHelper {
         } else {
             return true;
         }
+    }
+
+    public long checkreg(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        long cnt  = DatabaseUtils.queryNumEntries(db, table2);
+        db.close();
+        return cnt;
+
     }
 }

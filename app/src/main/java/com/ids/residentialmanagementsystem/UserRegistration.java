@@ -118,5 +118,9 @@ public class UserRegistration extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
 
 }

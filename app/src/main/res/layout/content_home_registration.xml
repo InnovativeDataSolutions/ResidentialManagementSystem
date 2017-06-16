@@ -22,6 +22,14 @@
         android:textSize="20dp"
         android:text="Please enter your Home ID for registration"/>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -180,5 +188,6 @@
 
 
 
-
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

@@ -20,9 +20,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class AccessCodeConfirmation extends AppCompatActivity {
-    EditText accesscodeet;
+    EditText username,password;
     Button acbut;
-    String acc;
+    String un,pw;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +32,16 @@ public class AccessCodeConfirmation extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         acbut = (Button)findViewById(R.id.acbut);
-        accesscodeet = (EditText)findViewById(R.id.accesscodeet);
+        username = (EditText)findViewById(R.id.username);
+        password = (EditText)findViewById(R.id.password);
     }
 
     public void accesscode(View view){
 
-        acc = accesscodeet.getText().toString();
-        if (acc.equals("")){
-            Toast.makeText(AccessCodeConfirmation.this, "Please enter access code", Toast.LENGTH_SHORT).show();
+        un = username.getText().toString();
+        pw = password.getText().toString();
+        if (un.equals("")||pw.equals("")){
+            Toast.makeText(AccessCodeConfirmation.this, "Please enter credentials", Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(AccessCodeConfirmation.this, "next page", Toast.LENGTH_SHORT).show();
 //            AccessCodeConf ac = new AccessCodeConf();
@@ -105,6 +107,10 @@ public class AccessCodeConfirmation extends AppCompatActivity {
 //            i.putExtra("err", err);
 //            startActivity(i);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
     }
 
 
