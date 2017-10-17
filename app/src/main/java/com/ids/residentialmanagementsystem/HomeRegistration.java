@@ -31,8 +31,8 @@ public class HomeRegistration extends AppCompatActivity {
     Button homereg, homeverify, peaktimebut, offpeaktimebut;
     Spinner serviceprovider, broadbandpackage;
     TextView to1, to2, homeinfotv,servprovtv,brdpacktv;
-    EditText homeet, peaktime, peakcount, offpeakcount, peaktime2, offpeaktime, offpeaktime2, billrecycle;
-    String homeid, peakC, offpeakC, peaktimeval, peaktime2val, offpeaktimeval, offpeaktime2val, billrecycleday, servprovresp, brdpackresp, vercode = "123456789", check, check2;
+    EditText homeet,vcode, peaktime, peakcount, offpeakcount, peaktime2, offpeaktime, offpeaktime2, billrecycle;
+    String homeid,vcodevar, peakC, offpeakC, peaktimeval, peaktime2val, offpeaktimeval, offpeaktime2val, billrecycleday, servprovresp, brdpackresp,check, check2;
     boolean inserthome;
     Context ctx = this;
     long count;
@@ -214,6 +214,7 @@ public class HomeRegistration extends AppCompatActivity {
         homereg = (Button) findViewById(R.id.homeidbut);
         homeverify = (Button) findViewById(R.id.homeidbut2);
         homeet = (EditText) findViewById(R.id.homeidet);
+        vcode = (EditText) findViewById(R.id.vcode);
         peakcount = (EditText) findViewById(R.id.peakcount);
         offpeakcount = (EditText) findViewById(R.id.offpeakcount);
         peaktimebut = (Button) findViewById(R.id.peaktimebut);
@@ -250,13 +251,14 @@ public class HomeRegistration extends AppCompatActivity {
 
     public void homereg2(View view2) {
         homeid = homeet.getText().toString();
+        vcodevar = vcode.getText().toString();
 
-        if (homeid.equals("")) {
-            Toast.makeText(HomeRegistration.this, "Please enter Home ID", Toast.LENGTH_SHORT).show();
+        if (homeid.equals("") || vcodevar.equals("")) {
+            Toast.makeText(HomeRegistration.this, "Please enter all infomation", Toast.LENGTH_SHORT).show();
         } else {
             HomeVerify hv = new HomeVerify();
-            hv.execute(homeid, vercode);
-            System.out.println("DATAOUT : " + homeid + vercode);
+            hv.execute(homeid, vcodevar);
+            System.out.println("DATAOUT : " + homeid + vcodevar);
         }
     }
 
@@ -309,7 +311,7 @@ public class HomeRegistration extends AppCompatActivity {
                 e.printStackTrace();
                 err = "APP RESPONSE: " + e.getMessage();
             }
-            System.out.println(err);
+            System.out.println(s);
 
             Toast.makeText(HomeRegistration.this, s, Toast.LENGTH_LONG).show();
 
@@ -335,6 +337,7 @@ public class HomeRegistration extends AppCompatActivity {
 
                 homeverify.setVisibility(View.GONE);
                 homeet.setVisibility(View.GONE);
+                vcode.setVisibility(View.GONE);
             }else{
                 homeinfotv.setText("You have already registered this device and created an admin!");
             }
@@ -425,7 +428,7 @@ public class HomeRegistration extends AppCompatActivity {
             }
             Toast.makeText(HomeRegistration.this, s, Toast.LENGTH_LONG).show();
 
-            inserthome = db.inserthomedetails(homeid,peakC, offpeakC, peaktimeval, peaktime2val, offpeaktimeval, offpeaktime2val, billrecycleday,vercode);
+            inserthome = db.inserthomedetails(homeid,peakC, offpeakC, peaktimeval, peaktime2val, offpeaktimeval, offpeaktime2val, billrecycleday,vcodevar);
             if (inserthome == true){
                 Toast.makeText(ctx, "Home details have been recorded", Toast.LENGTH_SHORT).show();
             }
